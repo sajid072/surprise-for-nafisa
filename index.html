@@ -1,0 +1,187 @@
+<think>
+First, the user wants a one-page birthday website for his girlfriend. It needs to be romantic.
+
+</think>```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love!</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef, #fecfef);
+        }
+
+        .intro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            z-index: 10;
+        }
+
+        .intro h1 {
+            font-size: 2rem;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .intro button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .intro button:hover {
+            background: #ff5252;
+        }
+
+        .main {
+            display: none;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .slideshow {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            margin: 0 auto 2rem;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .slideshow img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slideshow img.active {
+            opacity: 1;
+        }
+
+        .message {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            animation: slideUp 1s ease-in-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        audio {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .intro h1 {
+                font-size: 1.5rem;
+            }
+            .intro button {
+                font-size: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+            .slideshow {
+                height: 300px;
+            }
+            .message {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="intro">
+        <h1>Welcome to a little surprise made just for you ❤️</h1>
+        <button id="startBtn">Tap to Begin</button>
+    </div>
+
+    <div class="main">
+        <div class="slideshow">
+            <img src="photo1.jpg" alt="Memory 1" class="active">
+            <img src="photo2.jpg" alt="Memory 2">
+            <img src="photo3.jpg" alt="Memory 3">
+            <img src="photo4.jpg" alt="Memory 4">
+        </div>
+        <div class="message">
+            <p>Happy Birthday, my dearest love! 🎉</p>
+            <p>Every moment with you is a treasure, and today, I celebrate the amazing person you are. Your smile lights up my world, your laughter is my favorite melody, and your love is my greatest gift. Here's to many more adventures together, filled with joy, passion, and endless happiness. I love you more than words can say. ❤️</p>
+        </div>
+    </div>
+
+    <audio id="bgMusic" src="music.mp3" loop></audio>
+
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const intro = document.querySelector('.intro');
+        const main = document.querySelector('.main');
+        const bgMusic = document.getElementById('bgMusic');
+        const images = document.querySelectorAll('.slideshow img');
+        let currentImageIndex = 0;
+
+        startBtn.addEventListener('click', () => {
+            intro.style.display = 'none';
+            main.style.display = 'block';
+            bgMusic.play();
+            startSlideshow();
+        });
+
+        function startSlideshow() {
+            setInterval(() => {
+                images[currentImageIndex].classList.remove('active');
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                images[currentImageIndex].classList.add('active');
+            }, 3000); // Change image every 3 seconds
+        }
+    </script>
+</body>
+</html>
+```
